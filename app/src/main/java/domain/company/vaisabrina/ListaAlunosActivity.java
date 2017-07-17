@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -41,6 +42,15 @@ public class ListaAlunosActivity extends Activity {
 
                 Toast.makeText(ListaAlunosActivity.this, "Nome Selecionado "+name, Toast.LENGTH_SHORT).show();
                 return true;
+            }
+        });
+
+        // Float Button
+        Button floatButton = (Button)findViewById(R.id.novo_aluno);
+        floatButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(ListaAlunosActivity.this, "Novo", Toast.LENGTH_LONG).show();
             }
         });
     }
