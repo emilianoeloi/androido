@@ -13,7 +13,7 @@ import android.widget.Toast;
  * Created by android7045 on 17/07/17.
  */
 
-public class ListaAlunos extends Activity {
+public class ListaAlunosActivity extends Activity {
     private ListView listaAlunos;
 
     @Override
@@ -29,7 +29,7 @@ public class ListaAlunos extends Activity {
         listaAlunos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(ListaAlunos.this, "Posicao Selecionada: " + i, Toast.LENGTH_LONG).show();
+                Toast.makeText(ListaAlunosActivity.this, "Posicao Selecionada: " + i, Toast.LENGTH_LONG).show();
             }
 
         });
@@ -38,7 +38,8 @@ public class ListaAlunos extends Activity {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String name = listaAlunos.getItemAtPosition(i).toString();
-                Toast.makeText(ListaAlunos.this, "Nome Selecionado "+name, Toast.LENGTH_SHORT).show();
+
+                Toast.makeText(ListaAlunosActivity.this, "Nome Selecionado "+name, Toast.LENGTH_SHORT).show();
                 return true;
             }
         });
