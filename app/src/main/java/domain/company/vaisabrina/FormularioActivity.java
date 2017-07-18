@@ -16,6 +16,8 @@ import android.widget.Toast;
  */
 
 public class FormularioActivity extends AppCompatActivity {
+    FormularioHelper helper;
+    AlunoDAO dao;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,10 +27,14 @@ public class FormularioActivity extends AppCompatActivity {
         btnInserir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                RatingBar bar  = (RatingBar)findViewById(R.id.rating);
+                RatingBar bar  = (RatingBar)findViewById(R.id.aluno_nota);
                 Toast.makeText(FormularioActivity.this, "Você clicou no botão. Nota: "+bar.getRating(), Toast.LENGTH_SHORT).show();
             }
         });
+        /// Helper
+        helper = new FormularioHelper(this);
+        dao = new AlunoDAO(this);
+
     }
 
     @Override
@@ -41,7 +47,11 @@ public class FormularioActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int menuId = item.getItemId();
         if (menuId == R.id.menu_formulario) {
-            Toast.makeText(FormularioActivity.this, "Confirmar", Toast.LENGTH_SHORT).show();
+            Aluno aluno = helper.pegaAlunoDoFormulario();
+            dao.adiciona(aluno);
+            Toast.makeText(FormularioActivity.this, "Confirmar aluno: "+aluno.getNome(), Toast.LENGTH_SHORT).show();
+            finish();
+            return false;
         }
         return super.onOptionsItemSelected(item);
     }

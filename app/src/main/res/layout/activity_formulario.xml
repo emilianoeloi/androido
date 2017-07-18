@@ -10,30 +10,35 @@
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_gravity="center_horizontal"
-        android:src="@mipmap/ic_launcher" />
+        android:src="@drawable/avatar" />
     <EditText
+        android:text="Scarlett Ingrid Johansson"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/name"
+        android:id="@+id/aluno_nome"
         android:hint="Nome"/>
     <EditText
+        android:text="+1 444 55555"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/Telefone"
+        android:id="@+id/aluno_telefone"
         android:hint="Telefone"/>
     <EditText
+        android:text="New York, NY"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/endereco"
+        android:id="@+id/aluno_endereco"
         android:hint="Endereço"/>
     <EditText
+        android:text="http://www.imdb.com/name/nm0424060/bio"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/site"
+        android:id="@+id/aluno_site"
         android:hint="Site"/>
 
     <RatingBar
-        android:id="@+id/rating"
+        android:rating="5"
+        android:id="@+id/aluno_nota"
         android:numStars="5"
         android:max="10"
         android:layout_width="wrap_content"
