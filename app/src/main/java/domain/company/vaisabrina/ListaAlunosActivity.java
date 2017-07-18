@@ -1,9 +1,11 @@
 package domain.company.vaisabrina;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.ContextMenu;
 import android.view.MenuItem;
@@ -22,13 +24,10 @@ import java.util.List;
 
 public class ListaAlunosActivity extends AppCompatActivity {
     private ListView listaAlunos;
-    private AlunoDAO dao;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_alunos);
-
-        dao = new AlunoDAO(this);
 
         listaAlunos = (ListView)findViewById(R.id.lista_alunos);
 
@@ -77,10 +76,27 @@ public class ListaAlunosActivity extends AppCompatActivity {
         deleteItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
+
                 AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)menuInfo;
                 int position = info.position;
-                Aluno aluno = (Aluno)listaAlunos.getItemAtPosition(position);
-                dao.delete(aluno);
+                final Aluno aluno = (Aluno)listaAlunos.getItemAtPosition(position);
+                new AlertDialog.Builder(ListaAlunosActivity.this)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setTitle("Deletar")
+                        .setMessage("Deseja mesmo deletar?")
+                        .setPositiveButton("Quero",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        AlunoDAO dao = new AlunoDAO(ListaAlunosActivity.this);
+                                        dao.delete(aluno);
+                                        dao.close();
+                                        carregaLista();
+                                    }
+                                }
+                        )
+                        .setNegativeButton("Não", null).show();
+
                 return false;
             }
         });
