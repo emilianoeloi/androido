@@ -34,6 +34,7 @@ public class FormularioActivity extends AppCompatActivity {
         /// Helper
         helper = new FormularioHelper(this);
         dao = new AlunoDAO(this);
+        dao.close();
 
     }
 

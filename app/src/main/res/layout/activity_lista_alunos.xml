@@ -17,6 +17,9 @@
         android:layout_alignParentRight="true"
         android:layout_marginBottom="16dp"
         android:layout_marginRight="16dp"
+        android:text="+"
+        android:textSize="40sp"
+        android:textColor="#fff"
         />
 
 </RelativeLayout>

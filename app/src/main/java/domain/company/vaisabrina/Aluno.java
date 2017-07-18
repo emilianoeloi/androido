@@ -1,5 +1,7 @@
 package domain.company.vaisabrina;
 
+import java.util.List;
+
 /**
  * Created by emiliano on 7/18/17.
  */
@@ -11,6 +13,11 @@ public class Aluno {
     private String endereco;
     private String site;
     private Double nota;
+
+    @Override
+    public String toString() {
+        return this.getId() + " - " + this.getNome();
+    }
 
     public Long getId() {
         return id;
