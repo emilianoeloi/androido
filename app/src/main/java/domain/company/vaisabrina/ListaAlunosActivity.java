@@ -1,8 +1,10 @@
 package domain.company.vaisabrina;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -14,7 +16,7 @@ import android.widget.Toast;
  * Created by android7045 on 17/07/17.
  */
 
-public class ListaAlunosActivity extends Activity {
+public class ListaAlunosActivity extends AppCompatActivity {
     private ListView listaAlunos;
 
     @Override
@@ -50,7 +52,8 @@ public class ListaAlunosActivity extends Activity {
         floatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(ListaAlunosActivity.this, "Novo", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(ListaAlunosActivity.this, FormularioActivity.class);
+                startActivity(intent);
             }
         });
     }

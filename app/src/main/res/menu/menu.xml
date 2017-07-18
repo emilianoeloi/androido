@@ -1,0 +1,5 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_formulario" android:title="Cadastrar" app:showAsAction="always" android:icon="@drawable/ic_confirmar" />
+</menu>
