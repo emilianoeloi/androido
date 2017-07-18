@@ -17,7 +17,7 @@ import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
  */
 
 public class AlunoDAO extends SQLiteOpenHelper {
-    private static final int VERSAO = 1;
+    private static final int VERSAO = 2;
     private static final String TABELA = "ALUNO";
     private static final String DATABASE = "CADASTRO";
     AlunoDAO(Context ctx) {
@@ -80,5 +80,13 @@ public class AlunoDAO extends SQLiteOpenHelper {
         cursor.close();
         return alunos;
     }
+
+    public void delete(Aluno aluno) {
+        SQLiteDatabase db = getWritableDatabase();
+        String[] deleteArgs = {aluno.getId().toString()};
+        db.delete(TABELA, "ID=?", deleteArgs);
+    }
+
+
 
 }

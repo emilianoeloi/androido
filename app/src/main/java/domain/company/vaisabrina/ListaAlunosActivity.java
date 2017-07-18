@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.ContextMenu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -20,11 +22,13 @@ import java.util.List;
 
 public class ListaAlunosActivity extends AppCompatActivity {
     private ListView listaAlunos;
-
+    private AlunoDAO dao;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_alunos);
+
+        dao = new AlunoDAO(this);
 
         listaAlunos = (ListView)findViewById(R.id.lista_alunos);
 
@@ -43,9 +47,12 @@ public class ListaAlunosActivity extends AppCompatActivity {
                 String name = listaAlunos.getItemAtPosition(i).toString();
 
                 Toast.makeText(ListaAlunosActivity.this, "Nome Selecionado "+name, Toast.LENGTH_SHORT).show();
-                return true;
+                return false;
             }
         });
+
+        // Context Menu
+        registerForContextMenu(listaAlunos);
 
         // Float Button
         Button floatButton = (Button)findViewById(R.id.novo_aluno);
@@ -54,6 +61,27 @@ public class ListaAlunosActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(ListaAlunosActivity.this, FormularioActivity.class);
                 startActivity(intent);
+            }
+        });
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, final ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        menu.add("Ligar");
+        menu.add("Enviar SMS");
+        menu.add("Ahcar no Mapa");
+        menu.add("Navegar no Site");
+        MenuItem deleteItem = menu.add("Deletar");
+
+        deleteItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)menuInfo;
+                int position = info.position;
+                Aluno aluno = (Aluno)listaAlunos.getItemAtPosition(position);
+                dao.delete(aluno);
+                return false;
             }
         });
     }
@@ -67,8 +95,8 @@ public class ListaAlunosActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    protected void onStart() {
+        super.onStart();
         this.carregaLista();
     }
 }
