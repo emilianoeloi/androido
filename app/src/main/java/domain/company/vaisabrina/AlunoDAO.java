@@ -46,19 +46,6 @@ public class AlunoDAO extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
     }
 
-    public void adiciona(Aluno aluno){
-        SQLiteDatabase db = getWritableDatabase();
-        ContentValues values = new ContentValues();
-
-        values.put("NOME", aluno.getNome());
-        values.put("TELEFONE", aluno.getTelefone());
-        values.put("ENDERECO", aluno.getEndereco());
-        values.put("SITE", aluno.getSite());
-        values.put("NOTA", aluno.getNome());
-
-        db.insert(TABELA, null, values);
-    }
-
     public List<Aluno> getLista() {
         List<Aluno> alunos = new ArrayList<Aluno>();
         SQLiteDatabase db = getReadableDatabase();
@@ -81,6 +68,19 @@ public class AlunoDAO extends SQLiteOpenHelper {
         return alunos;
     }
 
+    public void adiciona(Aluno aluno){
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put("NOME", aluno.getNome());
+        values.put("TELEFONE", aluno.getTelefone());
+        values.put("ENDERECO", aluno.getEndereco());
+        values.put("SITE", aluno.getSite());
+        values.put("NOTA", aluno.getNome());
+
+        db.insert(TABELA, null, values);
+    }
+
     public void delete(Aluno aluno) {
         SQLiteDatabase db = getWritableDatabase();
         String[] deleteArgs = {aluno.getId().toString()};
@@ -99,6 +99,14 @@ public class AlunoDAO extends SQLiteOpenHelper {
         values.put("NOTA", aluno.getNome());
 
         db.update(TABELA, values, "ID=?", updateArgs);
+    }
+
+    public void save(Aluno aluno) {
+        if (aluno != null && aluno.getId() != null) {
+            update(aluno);
+        } else {
+            adiciona(aluno);
+        }
     }
 
 }

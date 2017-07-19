@@ -3,11 +3,14 @@ package domain.company.vaisabrina;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.ContextMenu;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -67,19 +70,44 @@ public class ListaAlunosActivity extends AppCompatActivity {
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, final ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
-        menu.add("Ligar");
-        menu.add("Enviar SMS");
-        menu.add("Ahcar no Mapa");
-        menu.add("Navegar no Site");
-        MenuItem editar = menu.add("Editar");
+        MenuItem ligarItem = menu.add("Ligar");
+        MenuItem smsItem = menu.add("Enviar SMS");
+        menu.add("Achar no Mapa");
+        MenuItem siteItem = menu.add("Navegar no Site");
+        MenuItem editarItem = menu.add("Editar");
         MenuItem deleteItem = menu.add("Deletar");
 
-        editar.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)menuInfo;
+        int position = info.position;
+        final Aluno aluno = (Aluno)listaAlunos.getItemAtPosition(position);
+
+        /// Ligar Item
+        Intent intentLigar = new Intent(Intent.ACTION_CALL);
+        intentLigar.setData(Uri.parse("tel:"+aluno.getTelefone()));
+        ligarItem.setIntent(intentLigar);
+
+        /// SMS Item
+        Intent intentSMS = new Intent(Intent.ACTION_VIEW);
+        intentSMS.setData(Uri.parse("sms:"+aluno.getTelefone()));
+        intentSMS.putExtra("sms_body", "Mensagem");
+        smsItem.setIntent(intentSMS);
+
+        /// Site Item
+        siteItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
-                AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)menuInfo;
-                int position = info.position;
-                final Aluno aluno = (Aluno)listaAlunos.getItemAtPosition(position);
+                Intent intentSite = new Intent(ListaAlunosActivity.this, FamigeradaActivity.class);
+                intentSite.putExtra("ALUNO", aluno);
+                Log.i("ListaAlunos", aluno.getSite());
+                startActivity(intentSite);
+                return false;
+            }
+        });
+
+
+        editarItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
                 Intent intent = new Intent(ListaAlunosActivity.this, FormularioActivity.class);
                 intent.putExtra("ALUNO", aluno);
                 startActivity(intent);
@@ -90,9 +118,6 @@ public class ListaAlunosActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
 
-                AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)menuInfo;
-                int position = info.position;
-                final Aluno aluno = (Aluno)listaAlunos.getItemAtPosition(position);
                 new AlertDialog.Builder(ListaAlunosActivity.this)
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .setTitle("Deletar")

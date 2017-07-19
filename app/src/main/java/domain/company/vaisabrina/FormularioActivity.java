@@ -52,11 +52,7 @@ public class FormularioActivity extends AppCompatActivity {
         int menuId = item.getItemId();
         if (menuId == R.id.menu_formulario) {
             Aluno aluno = helper.pegaAlunoDoFormulario();
-            if (aluno.getId() != null) {
-                dao.update(aluno);
-            } else {
-                dao.adiciona(aluno);
-            }
+            dao.save(aluno);
             Toast.makeText(FormularioActivity.this, "Confirmar aluno: "+aluno.getNome(), Toast.LENGTH_SHORT).show();
             finish();
             return false;
