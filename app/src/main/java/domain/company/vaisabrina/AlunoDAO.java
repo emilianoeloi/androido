@@ -36,6 +36,7 @@ public class AlunoDAO extends SQLiteOpenHelper {
                 "ENDERECO TEXT,"+
                 "SITE TEXT,"+
                 "NOTA REAL,"+
+                "EMAIL TEXT"+
                 ")";
         sqLiteDatabase.execSQL(ddl);
     }
@@ -67,7 +68,7 @@ public class AlunoDAO extends SQLiteOpenHelper {
             aluno.setTelefone(cursor.getString(cursor.getColumnIndex("TELEFONE")));
             aluno.setEndereco(cursor.getString(cursor.getColumnIndex("ENDERECO")));
             aluno.setSite(cursor.getString(cursor.getColumnIndex("SITE")));
-            aluno.setNota(cursor.getFloat(cursor.getColumnIndex("NOTA")));
+            aluno.setNota(cursor.getDouble(cursor.getColumnIndex("NOTA")));
             aluno.setEmail(cursor.getString(cursor.getColumnIndex("EMAIL")));
             alunos.add(aluno);
         }
@@ -85,7 +86,7 @@ public class AlunoDAO extends SQLiteOpenHelper {
         values.put("TELEFONE", aluno.getTelefone());
         values.put("ENDERECO", aluno.getEndereco());
         values.put("SITE", aluno.getSite());
-        values.put("NOTA", aluno.getNome());
+        values.put("NOTA", aluno.getNota());
         values.put("EMAIL", aluno.getEmail());
 
         db.insert(TABELA, null, values);
@@ -107,7 +108,7 @@ public class AlunoDAO extends SQLiteOpenHelper {
         values.put("TELEFONE", aluno.getTelefone());
         values.put("ENDERECO", aluno.getEndereco());
         values.put("SITE", aluno.getSite());
-        values.put("NOTA", aluno.getNome());
+        values.put("NOTA", aluno.getNota());
         values.put("EMAIL", aluno.getEmail());
 
         db.update(TABELA, values, "ID=?", updateArgs);

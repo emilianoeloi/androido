@@ -15,7 +15,7 @@ public class Aluno implements Serializable{
     private String telefone;
     private String endereco;
     private String site;
-    private Float nota;
+    private Double nota;
 
     @Override
     public String toString() {
@@ -79,11 +79,11 @@ public class Aluno implements Serializable{
         this.site = site;
     }
 
-    public Float getNota() {
+    public Double getNota() {
         return nota;
     }
 
-    public void setNota(Float nota) {
+    public void setNota(Double nota) {
         this.nota = nota;
     }
 }

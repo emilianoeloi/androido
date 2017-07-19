@@ -52,7 +52,7 @@ public class FormularioHelper {
         aluno.setTelefone(telefone.getText().toString());
         aluno.setEndereco(endereco.getText().toString());
         aluno.setSite(site.getText().toString());
-        aluno.setNota(nota.getRating());
+        aluno.setNota(Double.valueOf(nota.getProgress()));
         aluno.setEmail(email.getText().toString());
         return aluno;
     }
@@ -68,7 +68,7 @@ public class FormularioHelper {
         endereco.setText(alunoForUpdate.getEndereco());
         site.setText(alunoForUpdate.getSite());
         email.setText(alunoForUpdate.getEmail());
-        nota.setRating(alunoForUpdate.getNota());
+        nota.setProgress(alunoForUpdate.getNota().intValue());
         this.aluno = alunoForUpdate;
     }
 }
