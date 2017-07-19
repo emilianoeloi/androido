@@ -72,7 +72,7 @@ public class ListaAlunosActivity extends AppCompatActivity {
         super.onCreateContextMenu(menu, v, menuInfo);
         MenuItem ligarItem = menu.add("Ligar");
         MenuItem smsItem = menu.add("Enviar SMS");
-        menu.add("Achar no Mapa");
+        MenuItem acharItem = menu.add("Achar no Mapa");
         MenuItem siteItem = menu.add("Navegar no Site");
         MenuItem editarItem = menu.add("Editar");
         MenuItem deleteItem = menu.add("Deletar");
@@ -103,6 +103,12 @@ public class ListaAlunosActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+        /// Achar no Mapa
+        Intent intentMapa = new Intent(Intent.ACTION_VIEW);
+        String endereco = aluno.getEndereco();
+        intentMapa.setData(Uri.parse("geo:0,0?z=14&q="+Uri.encode(endereco)));
+        acharItem.setIntent(intentMapa);
 
 
         editarItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
