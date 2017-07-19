@@ -18,6 +18,7 @@ public class FormularioHelper {
     private EditText telefone;
     private EditText endereco;
     private EditText site;
+    private EditText email;
     private RatingBar nota;
 
     private Aluno aluno;
@@ -30,6 +31,7 @@ public class FormularioHelper {
         endereco = (EditText)activity.findViewById(R.id.aluno_endereco);
         site = (EditText)activity.findViewById(R.id.aluno_site);
         nota = (RatingBar)activity.findViewById(R.id.aluno_nota);
+        email = (EditText) activity.findViewById(R.id.aluno_email);
     }
 
     public Button getFotoButton(){
@@ -51,6 +53,7 @@ public class FormularioHelper {
         aluno.setEndereco(endereco.getText().toString());
         aluno.setSite(site.getText().toString());
         aluno.setNota(nota.getRating());
+        aluno.setEmail(email.getText().toString());
         return aluno;
     }
 
@@ -64,6 +67,7 @@ public class FormularioHelper {
         telefone.setText(alunoForUpdate.getTelefone());
         endereco.setText(alunoForUpdate.getEndereco());
         site.setText(alunoForUpdate.getSite());
+        email.setText(alunoForUpdate.getEmail());
         nota.setRating(alunoForUpdate.getNota());
         this.aluno = alunoForUpdate;
     }

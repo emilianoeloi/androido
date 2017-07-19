@@ -11,6 +11,7 @@ public class Aluno implements Serializable{
     private Long id;
     private String caminhoFoto;
     private String nome;
+    private String email;
     private String telefone;
     private String endereco;
     private String site;
@@ -28,6 +29,15 @@ public class Aluno implements Serializable{
     public void setCaminhoFoto(String caminhoFoto) {
         this.caminhoFoto = caminhoFoto;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
 
     public Long getId() {
         return id;

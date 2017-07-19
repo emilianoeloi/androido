@@ -39,6 +39,11 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/aluno_email"
+        android:hint="E-mail"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/aluno_telefone"
         android:hint="Telefone"/>
     <EditText

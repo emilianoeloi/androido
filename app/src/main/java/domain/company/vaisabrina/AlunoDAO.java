@@ -17,7 +17,7 @@ import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
  */
 
 public class AlunoDAO extends SQLiteOpenHelper {
-    private static final int VERSAO = 3;
+    private static final int VERSAO = 4;
     private static final String TABELA = "ALUNO";
     private static final String DATABASE = "CADASTRO";
     AlunoDAO(Context ctx) {
@@ -35,22 +35,27 @@ public class AlunoDAO extends SQLiteOpenHelper {
                 "TELEFONE TEXT,"+
                 "ENDERECO TEXT,"+
                 "SITE TEXT,"+
-                "NOTA REAL"+
+                "NOTA REAL,"+
                 ")";
         sqLiteDatabase.execSQL(ddl);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int antiga, int nova) {
-        String ddl = "DROP TABLE IF EXISTS "+TABELA;
+        String ddl = "";
+        if (antiga == 3 && nova == 4) {
+            ddl = "ALTER TABLE "+ TABELA + " ADD COLUMN EMAIL TEXT;";
+        } else {
+//            ddl = "DROP TABLE IF EXISTS "+TABELA;
+//            onCreate(sqLiteDatabase);
+        }
         sqLiteDatabase.execSQL(ddl);
-        onCreate(sqLiteDatabase);
     }
 
     public List<Aluno> getLista() {
         List<Aluno> alunos = new ArrayList<Aluno>();
         SQLiteDatabase db = getReadableDatabase();
-        String dql = "SELECT ID, CAMINHO_FOTO, NOME, TELEFONE, ENDERECO, SITE, NOTA FROM "+
+        String dql = "SELECT ID, CAMINHO_FOTO, NOME, TELEFONE, ENDERECO, SITE, NOTA, EMAIL FROM "+
                 TABELA+";";
         Cursor cursor = db.rawQuery(dql, null);
 
@@ -63,6 +68,7 @@ public class AlunoDAO extends SQLiteOpenHelper {
             aluno.setEndereco(cursor.getString(cursor.getColumnIndex("ENDERECO")));
             aluno.setSite(cursor.getString(cursor.getColumnIndex("SITE")));
             aluno.setNota(cursor.getFloat(cursor.getColumnIndex("NOTA")));
+            aluno.setEmail(cursor.getString(cursor.getColumnIndex("EMAIL")));
             alunos.add(aluno);
         }
 
@@ -80,6 +86,7 @@ public class AlunoDAO extends SQLiteOpenHelper {
         values.put("ENDERECO", aluno.getEndereco());
         values.put("SITE", aluno.getSite());
         values.put("NOTA", aluno.getNome());
+        values.put("EMAIL", aluno.getEmail());
 
         db.insert(TABELA, null, values);
     }
@@ -101,6 +108,7 @@ public class AlunoDAO extends SQLiteOpenHelper {
         values.put("ENDERECO", aluno.getEndereco());
         values.put("SITE", aluno.getSite());
         values.put("NOTA", aluno.getNome());
+        values.put("EMAIL", aluno.getEmail());
 
         db.update(TABELA, values, "ID=?", updateArgs);
     }
