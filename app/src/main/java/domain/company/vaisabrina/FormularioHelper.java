@@ -25,12 +25,24 @@ public class FormularioHelper {
     }
 
     public Aluno pegaAlunoDoFormulario() {
-        aluno = new Aluno();
         aluno.setNome(nome.getText().toString());
         aluno.setTelefone(telefone.getText().toString());
         aluno.setEndereco(endereco.getText().toString());
         aluno.setSite(site.getText().toString());
-        aluno.setNota((double)nota.getRating());
+        aluno.setNota(nota.getRating());
         return aluno;
+    }
+
+    public void preencherFormulario(Aluno aluno) {
+        if (aluno == null) {
+            aluno = new Aluno();
+            return;
+        }
+        nome.setText(aluno.getNome());
+        telefone.setText(aluno.getTelefone());
+        endereco.setText(aluno.getEndereco());
+        site.setText(aluno.getSite());
+        nota.setRating(aluno.getNota());
+        this.aluno = aluno;
     }
 }

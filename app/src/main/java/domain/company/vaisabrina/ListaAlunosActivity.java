@@ -71,6 +71,19 @@ public class ListaAlunosActivity extends AppCompatActivity {
         menu.add("Enviar SMS");
         menu.add("Ahcar no Mapa");
         menu.add("Navegar no Site");
+        MenuItem editar = menu.add("Editar");
+        editar.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)menuInfo;
+                int position = info.position;
+                final Aluno aluno = (Aluno)listaAlunos.getItemAtPosition(position);
+                Intent intent = new Intent(ListaAlunosActivity.this, FormularioActivity.class);
+                intent.putExtra("ALUNO", aluno);
+                startActivity(intent);
+                return false;
+            }
+        });
         MenuItem deleteItem = menu.add("Deletar");
 
         deleteItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {

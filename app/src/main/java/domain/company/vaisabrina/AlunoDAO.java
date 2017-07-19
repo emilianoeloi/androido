@@ -73,7 +73,7 @@ public class AlunoDAO extends SQLiteOpenHelper {
             aluno.setTelefone(cursor.getString(cursor.getColumnIndex("TELEFONE")));
             aluno.setEndereco(cursor.getString(cursor.getColumnIndex("ENDERECO")));
             aluno.setSite(cursor.getString(cursor.getColumnIndex("SITE")));
-            aluno.setNota(cursor.getDouble(cursor.getColumnIndex("NOTA")));
+            aluno.setNota(cursor.getFloat(cursor.getColumnIndex("NOTA")));
             alunos.add(aluno);
         }
 
@@ -87,6 +87,18 @@ public class AlunoDAO extends SQLiteOpenHelper {
         db.delete(TABELA, "ID=?", deleteArgs);
     }
 
+    public void update(Aluno aluno) {
+        SQLiteDatabase db = getWritableDatabase();
+        String [] updateArgs = {aluno.getId().toString()};
 
+        ContentValues values = new ContentValues();
+        values.put("NOME", aluno.getNome());
+        values.put("TELEFONE", aluno.getTelefone());
+        values.put("ENDERECO", aluno.getEndereco());
+        values.put("SITE", aluno.getSite());
+        values.put("NOTA", aluno.getNome());
+
+        db.update(TABELA, values, "ID=?", updateArgs);
+    }
 
 }

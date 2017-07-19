@@ -1,6 +1,7 @@
 package domain.company.vaisabrina;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -34,8 +35,10 @@ public class FormularioActivity extends AppCompatActivity {
         /// Helper
         helper = new FormularioHelper(this);
         dao = new AlunoDAO(this);
-        dao.close();
 
+        Intent intenet = getIntent();
+        Aluno aluno = (Aluno)getIntent().getSerializableExtra("ALUNO");
+        helper.preencherFormulario(aluno);
     }
 
     @Override
@@ -49,7 +52,11 @@ public class FormularioActivity extends AppCompatActivity {
         int menuId = item.getItemId();
         if (menuId == R.id.menu_formulario) {
             Aluno aluno = helper.pegaAlunoDoFormulario();
-            dao.adiciona(aluno);
+            if (aluno.getId() != null) {
+                dao.update(aluno);
+            } else {
+                dao.adiciona(aluno);
+            }
             Toast.makeText(FormularioActivity.this, "Confirmar aluno: "+aluno.getNome(), Toast.LENGTH_SHORT).show();
             finish();
             return false;

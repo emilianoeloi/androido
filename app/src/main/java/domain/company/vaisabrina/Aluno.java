@@ -1,18 +1,19 @@
 package domain.company.vaisabrina;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by emiliano on 7/18/17.
  */
 
-public class Aluno {
+public class Aluno implements Serializable{
     private Long id;
     private String nome;
     private String telefone;
     private String endereco;
     private String site;
-    private Double nota;
+    private Float nota;
 
     @Override
     public String toString() {
@@ -59,11 +60,11 @@ public class Aluno {
         this.site = site;
     }
 
-    public Double getNota() {
+    public Float getNota() {
         return nota;
     }
 
-    public void setNota(Double nota) {
+    public void setNota(Float nota) {
         this.nota = nota;
     }
 }
