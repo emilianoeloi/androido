@@ -9,6 +9,7 @@ import java.util.List;
 
 public class Aluno implements Serializable{
     private Long id;
+    private String caminhoFoto;
     private String nome;
     private String telefone;
     private String endereco;
@@ -18,6 +19,14 @@ public class Aluno implements Serializable{
     @Override
     public String toString() {
         return this.getId() + " - " + this.getNome();
+    }
+
+    public String getCaminhoFoto() {
+        return caminhoFoto;
+    }
+
+    public void setCaminhoFoto(String caminhoFoto) {
+        this.caminhoFoto = caminhoFoto;
     }
 
     public Long getId() {

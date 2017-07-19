@@ -17,7 +17,7 @@ import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
  */
 
 public class AlunoDAO extends SQLiteOpenHelper {
-    private static final int VERSAO = 2;
+    private static final int VERSAO = 3;
     private static final String TABELA = "ALUNO";
     private static final String DATABASE = "CADASTRO";
     AlunoDAO(Context ctx) {
@@ -30,6 +30,7 @@ public class AlunoDAO extends SQLiteOpenHelper {
                 TABELA+
                 "("+
                 "ID INTEGER PRIMARY KEY,"+
+                "CAMINHO_FOTO TEXT,"+
                 "NOME TEXT,"+
                 "TELEFONE TEXT,"+
                 "ENDERECO TEXT,"+
@@ -49,13 +50,14 @@ public class AlunoDAO extends SQLiteOpenHelper {
     public List<Aluno> getLista() {
         List<Aluno> alunos = new ArrayList<Aluno>();
         SQLiteDatabase db = getReadableDatabase();
-        String dql = "SELECT ID, NOME, TELEFONE, ENDERECO, SITE, NOTA FROM "+
+        String dql = "SELECT ID, CAMINHO_FOTO, NOME, TELEFONE, ENDERECO, SITE, NOTA FROM "+
                 TABELA+";";
         Cursor cursor = db.rawQuery(dql, null);
 
         while(cursor.moveToNext()) {
             Aluno aluno = new Aluno();
             aluno.setId(cursor.getLong(cursor.getColumnIndex("ID")));
+            aluno.setCaminhoFoto(cursor.getString(cursor.getColumnIndex("CAMINHO_FOTO")));
             aluno.setNome(cursor.getString(cursor.getColumnIndex("NOME")));
             aluno.setTelefone(cursor.getString(cursor.getColumnIndex("TELEFONE")));
             aluno.setEndereco(cursor.getString(cursor.getColumnIndex("ENDERECO")));
@@ -73,6 +75,7 @@ public class AlunoDAO extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
 
         values.put("NOME", aluno.getNome());
+        values.put("CAMINHO_FOTO", aluno.getCaminhoFoto());
         values.put("TELEFONE", aluno.getTelefone());
         values.put("ENDERECO", aluno.getEndereco());
         values.put("SITE", aluno.getSite());
@@ -92,6 +95,7 @@ public class AlunoDAO extends SQLiteOpenHelper {
         String [] updateArgs = {aluno.getId().toString()};
 
         ContentValues values = new ContentValues();
+        values.put("CAMINHO_FOTO", aluno.getCaminhoFoto());
         values.put("NOME", aluno.getNome());
         values.put("TELEFONE", aluno.getTelefone());
         values.put("ENDERECO", aluno.getEndereco());
