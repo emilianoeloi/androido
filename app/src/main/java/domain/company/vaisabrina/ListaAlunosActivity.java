@@ -72,6 +72,8 @@ public class ListaAlunosActivity extends AppCompatActivity {
         menu.add("Ahcar no Mapa");
         menu.add("Navegar no Site");
         MenuItem editar = menu.add("Editar");
+        MenuItem deleteItem = menu.add("Deletar");
+
         editar.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
@@ -84,8 +86,6 @@ public class ListaAlunosActivity extends AppCompatActivity {
                 return false;
             }
         });
-        MenuItem deleteItem = menu.add("Deletar");
-
         deleteItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
@@ -97,7 +97,7 @@ public class ListaAlunosActivity extends AppCompatActivity {
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .setTitle("Deletar")
                         .setMessage("Deseja mesmo deletar?")
-                        .setPositiveButton("Quero",
+                        .setPositiveButton("Sim",
                                 new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {

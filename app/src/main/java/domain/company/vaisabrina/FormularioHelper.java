@@ -33,16 +33,16 @@ public class FormularioHelper {
         return aluno;
     }
 
-    public void preencherFormulario(Aluno aluno) {
-        if (aluno == null) {
-            aluno = new Aluno();
+    public void preencherFormulario(Aluno alunoForUpdate) {
+        if (alunoForUpdate == null) {
+            this.aluno = new Aluno();
             return;
         }
-        nome.setText(aluno.getNome());
-        telefone.setText(aluno.getTelefone());
-        endereco.setText(aluno.getEndereco());
-        site.setText(aluno.getSite());
-        nota.setRating(aluno.getNota());
-        this.aluno = aluno;
+        nome.setText(alunoForUpdate.getNome());
+        telefone.setText(alunoForUpdate.getTelefone());
+        endereco.setText(alunoForUpdate.getEndereco());
+        site.setText(alunoForUpdate.getSite());
+        nota.setRating(alunoForUpdate.getNota());
+        this.aluno = alunoForUpdate;
     }
 }
