@@ -20,7 +20,7 @@ public class AlunoDAO extends SQLiteOpenHelper {
     private static final int VERSAO = 4;
     private static final String TABELA = "ALUNO";
     private static final String DATABASE = "CADASTRO";
-    AlunoDAO(Context ctx) {
+    public AlunoDAO(Context ctx) {
         super(ctx, DATABASE, null, VERSAO);
     }
 
@@ -120,6 +120,17 @@ public class AlunoDAO extends SQLiteOpenHelper {
         } else {
             adiciona(aluno);
         }
+    }
+
+    public Boolean isAluno(String nome) {
+        List<Aluno> alunos = this.getLista();
+        for (int i = 0; i < alunos.size(); i++) {
+            Aluno aluno = alunos.get(i);
+            if (aluno.getNome() == nome) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }
