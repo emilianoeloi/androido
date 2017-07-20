@@ -22,11 +22,13 @@ public class WebClient {
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Accept", "application/json");
-            conn.setRequestProperty("Content-type", "application/json");
+            conn.setRequestProperty("Content-Type", "application/json");
             conn.setDoInput(true);
             conn.setDoOutput(true);
+            PrintStream saida = new PrintStream(conn.getOutputStream());
+            saida.println(json);
             conn.connect();
-            return  new Scanner(conn.getInputStream()).next();
+            return new Scanner(conn.getInputStream()).next();
         } catch(MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
