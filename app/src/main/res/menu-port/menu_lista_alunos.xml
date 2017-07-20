@@ -10,12 +10,12 @@
         android:id="@+id/menu_receber_provas"
         android:icon="@drawable/ic_receber"
         android:title="Baixar Provas"
-        app:showAsAction="always"
+        app:showAsAction="never"
         />
     <item
         android:id="@+id/menu_enviar_notas"
         android:icon="@drawable/ic_enviar"
         android:title="Enviar Notas"
-        app:showAsAction="always"
+        app:showAsAction="never"
         />
 </menu>
