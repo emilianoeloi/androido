@@ -18,4 +18,10 @@
         android:title="Enviar Notas"
         app:showAsAction="always"
         />
+    <item
+        android:id="@+id/menu_galeria"
+        android:icon="@drawable/ic_opcoes"
+        android:title="Galeria"
+        app:showAsAction="always"
+        />
 </menu>

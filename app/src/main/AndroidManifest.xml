@@ -21,6 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="domain.company.vaisabrina.GaleriaActivity" />
         <activity android:name="domain.company.vaisabrina.FormularioActivity" />
         <activity android:name="domain.company.vaisabrina.FamigeradaActivity" />
         <activity android:name="domain.company.vaisabrina.ProvaActivity" />

@@ -42,6 +42,8 @@ public class ListaProvaFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Prova selecionada = (Prova)adapterView.getItemAtPosition(i);
+                ProvaActivity calendarioProva = (ProvaActivity) getActivity();
+                calendarioProva.selecionaProva(selecionada);
                 Toast.makeText(getActivity(), "Prova selecionada: " + selecionada, Toast.LENGTH_LONG).show();
             }
         });
