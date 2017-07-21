@@ -82,9 +82,14 @@ public class ListaAlunosActivity extends AppCompatActivity {
             case R.id.menu_receber_provas:
                 Intent prova = new Intent(this, ProvaActivity.class);
                 startActivity(prova);
+                break;
             case R.id.menu_galeria:
                 Intent gallery = new Intent(this, GaleriaActivity.class);
                 startActivity(gallery);
+                break;
+            case R.id.menu_mapa:
+                Intent mapa = new Intent(this, MostraAlunosActivity.class);
+                startActivity(mapa);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -127,10 +132,16 @@ public class ListaAlunosActivity extends AppCompatActivity {
         });
 
         /// Achar no Mapa
-        Intent intentMapa = new Intent(Intent.ACTION_VIEW);
-        String endereco = aluno.getEndereco();
-        intentMapa.setData(Uri.parse("geo:0,0?z=14&q="+Uri.encode(endereco)));
-        acharItem.setIntent(intentMapa);
+        acharItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                Intent intentMapa = new Intent(ListaAlunosActivity.this, MostraAlunosActivity.class);
+                intentMapa.putExtra("ALUNO", aluno);
+                startActivity(intentMapa);
+                return false;
+            }
+        });
+
 
 
         editarItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
