@@ -23,6 +23,7 @@
         </activity>
         <activity android:name="domain.company.vaisabrina.FormularioActivity" />
         <activity android:name="domain.company.vaisabrina.FamigeradaActivity" />
+        <activity android:name="domain.company.vaisabrina.ProvaActivity" />
         <receiver android:name="domain.company.vaisabrina.receiver.SMSReceiver" android:enabled="true">
             <intent-filter>
                 <action android:name="android.provider.Telephony.SMS_RECEIVE" />

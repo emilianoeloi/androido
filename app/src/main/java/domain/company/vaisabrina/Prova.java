@@ -1,5 +1,6 @@
 package domain.company.vaisabrina;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +8,7 @@ import java.util.List;
  * Created by emiliano on 7/20/17.
  */
 
-public class Prova {
+public class Prova implements Serializable {
     private String data;
     private String materia;
     private String descricao;
@@ -16,6 +17,11 @@ public class Prova {
     public Prova(String data, String materia) {
         this.data = data;
         this.materia = materia;
+    }
+
+    @Override
+    public String toString() {
+        return this.materia;
     }
 
     public String getData() {
