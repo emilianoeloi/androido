@@ -16,8 +16,19 @@ public class ProvaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_prova);
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.prova_view, new ListaProvaFragment());
+        if (isTablet()) {
+            transaction
+                    .replace(R.id.prova_view, new ListaProvaFragment())
+                    .replace(R.id.prova_detalhe, new DetalhesProvaFragment());
+        } else {
+            transaction.replace(R.id.prova_view, new ListaProvaFragment());
+        }
+
         transaction.commit();
 
+    }
+
+    private boolean isTablet() {
+        return getResources().getBoolean(R.bool.isTablet);
     }
 }
