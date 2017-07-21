@@ -20,7 +20,7 @@
         />
     <item
         android:id="@+id/menu_galeria"
-        android:icon="@drawable/ic_opcoes"
+        android:icon="@drawable/ic_camera"
         android:title="Galeria"
         app:showAsAction="always"
         />
